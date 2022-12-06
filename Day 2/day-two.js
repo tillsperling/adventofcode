@@ -31,7 +31,7 @@ Points
 
 // read input
 
-var fs = require("fs");
+const fs = require("fs");
 let input = fs.readFileSync("./input.txt").toString("utf-8");
 
 // define variables
@@ -41,7 +41,7 @@ let tempArray = [];
 const workingArray = [];
 
 // push lines in input array
-var inputArray = input.split("");
+let inputArray = input.split("");
 
 // remove line breaks and spaces from inputArray
 

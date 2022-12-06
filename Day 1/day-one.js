@@ -1,8 +1,8 @@
 // Handle input.txt and create array.
-var fs = require("fs");
-var text = fs.readFileSync("./input.txt").toString("utf-8");
+const fs = require("fs");
+const text = fs.readFileSync("./input.txt").toString("utf-8");
 // pushes contents of input.txt as strings into array
-var stringArray = text.split("\n");
+const stringArray = text.split("\n");
 const numberArray = [];
 const finalArray = [];
 
