@@ -43,3 +43,8 @@ function part1() {
 
 }
 part1()
+
+function part2() {
+
+}
+part2()
