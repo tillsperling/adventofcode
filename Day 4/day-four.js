@@ -1,0 +1,12 @@
+/*
+
+Every Secition is an ID
+Each Elv has a range of IDs assigned
+Many Assignments overlap though
+Elves pair up in twos 
+The assignments range from a single section to multiple sections
+
+Find out which pair as an assignment completely contained in the other ones.
+Count these.
+
+*/
