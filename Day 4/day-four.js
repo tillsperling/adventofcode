@@ -60,27 +60,23 @@ False
 // Read Input and create Variables
 const { timeStamp } = require("console");
 const fs = require("fs");
-let input = fs.readFileSync("input.txt").toString();
+let input = fs.readFileSync("input.txt").toString().replace(/(\r)/gm, "");
 let inputArray = input.split("");
 const workingArray = [];
 let result = 0;
 let tempString = "";
 let tempArray = [];
 
-for (i = 0; i < inputArray.length; i++) {
-    if (inputArray[i] == "-") {
-        tempArray.push(tempString);
-        tempString = "";
-    } else if (inputArray[i] == ",") {
-        workingArray.push(tempArray);
-        tempArray = [];
-        tempString = "";
-    } else {
-        tempString = tempString + inputArray[i];
-        tempString = tempString.replace(/(\r\n|\n|\r)/gm, "");
+let schminput = input.split(/(,|-|\n)/);
+const remove1 = ",";
+const remove2 = "-";
+for (i = 0; i < schminput.length; i++) {
+    if (schminput[i] === remove1 || schminput[i] === remove2) {
+        schminput.splice(i, 1);
+        // break;       //<-- Uncomment  if only the first term has to be removed
     }
 }
-console.log(workingArray);
+console.log(schminput);
 
 // Function
 
