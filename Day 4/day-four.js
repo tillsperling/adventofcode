@@ -51,6 +51,12 @@ False
     
 */
 
+/*
+    Take string up until linebreak
+    convert string up to '-' OR ',' to number
+    first number a, 2nd b, third c, fourth d
+*/
+
 // Read Input and create Variables
 const { timeStamp } = require("console");
 const fs = require("fs");
