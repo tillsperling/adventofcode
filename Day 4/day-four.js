@@ -50,3 +50,32 @@ False
     <-c-----d->
     
 */
+
+// Read Input and create Variables
+const { timeStamp } = require("console");
+const fs = require("fs");
+let input = fs.readFileSync("input.txt").toString();
+let inputArray = input.split("");
+const workingArray = [];
+let result = 0;
+let tempString = "";
+let tempArray = [];
+
+for (i = 0; i < inputArray.length; i++) {
+    if (inputArray[i] == "-") {
+        tempArray.push(tempString);
+        tempString = "";
+    } else if (inputArray[i] == ",") {
+        workingArray.push(tempArray);
+        tempArray = [];
+        tempString = "";
+    } else {
+        tempString = tempString + inputArray[i];
+        tempString = tempString.replace(/(\r\n|\n|\r)/gm, "");
+    }
+}
+console.log(workingArray);
+
+// Function
+
+// Call Function and Log Result
