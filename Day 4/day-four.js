@@ -47,14 +47,6 @@ function part1() {
 }
 // part1();
 
-// overlaps if part is true and
-// <a----b> a <= c && c <=b
-//      <c----d>
-//<c----d>  c <= a && a <= d
-//     <a----b>
-//
-//
-
 function part2() {
     let ans = 0;
     const map = inputs.map((input) => {
