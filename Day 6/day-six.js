@@ -8,7 +8,7 @@ let input = fs
 function part1() {
     const originalInputLength = input.length; // defining original Input Length cause we change the array
     let ans = 0;
-    let messageLength = 14;
+    let messageLength = 14; // set to 4 for part 1, set to 14 for part 2
     let ansArr = [];
     for (i = 0; i < originalInputLength; i++) {
         for (j = 0; j < messageLength; j++) {
