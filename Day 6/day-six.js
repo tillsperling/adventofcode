@@ -6,43 +6,37 @@ let input = fs
     .split("");
 
 function part1() {
-    const map = new Map();
+    const originalInputLength = input.length; // defining original Input Length cause we change the array
     let ans = 0;
-    for (i = 0; i < input.length; i++) {
-        let a = input[i];
-        let b = input[i + 1];
-        let c = input[i + 2];
-        let d = input[i + 3];
-
-        if (a == b || a == c | a == d || b == c || b == d || c == d) {
-            continue;
+    let messageLength = 14; // set to 4 for part 1, set to 14 for part 2
+    let ansArr = [];
+    for (i = 0; i < originalInputLength; i++) {
+        for (j = 0; j < messageLength; j++) {
+            // create array with a length of "messageLength" filled with the first "messageLength" characters of input
+            if (ansArr.length < messageLength) {
+                ansArr.push(input.shift());
+                ans++; // counts up towards the last push so we know at which char we are at
+            }
+        }
+        if (containsDuplicates(ansArr) == true) {
+            ansArr.shift();
         } else {
-            console.log(a, b, c, d);
-            ans = i + 4;
-            break;
+            console.log(ans);
+            return;
         }
     }
-    console.log(ans);
 }
 
-function part2() {
-    const map = new Map();
-    let ans = 0;
-    for (i = 0; i < input.length; i++) {
-        let a = input[i];
-        let b = input[i + 1];
-        let c = input[i + 2];
-        let d = input[i + 3];
-
-        if (a == b || a == c | a == d || b == c || b == d || c == d) {
-            continue;
-        } else {
-            console.log(a, b, c, d);
-            ans = i + 4;
-            break;
+function containsDuplicates(arr) {
+    const result = arr.some((element) => {
+        if (arr.indexOf(element) !== arr.lastIndexOf(element)) {
+            return true;
         }
-    }
-    console.log(ans);
+
+        return false;
+    });
+
+    return result;
 }
 
 part1();
