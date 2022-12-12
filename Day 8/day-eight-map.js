@@ -4,5 +4,5 @@ const inputs = fs
     .replace(/\r/g, "") // remove all \r characters to avoid issues on Windows
     .trim() // Remove starting/ending whitespace
     .split("\n") // Split on newline
-    .map((input) => [...input].map());
+    .map((input) => [...input].map(Number));
 console.log(inputs);
