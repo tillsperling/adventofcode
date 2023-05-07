@@ -96,32 +96,60 @@ function part1(input: string) {
 }
 
 function part2(input: string) {
-
     // creating array
-    let textArr = [text.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" "), text.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")];
+    let textArr = input.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    let oxygen: any = [];
+    let co2: any = [];
 
-    // // check the most common number in nth palce
+    // check the most common number in nth palce
     let zeros: number = 0;
     let ones: number = 0;
     let counter: number = 0;
 
-
-    // // oxygen loop
-    while (textArr[0].length > 1 || textArr[1].length > 1) {
-
-        for (let i = 0; i < textArr[0].length; i++) {
-            textArr[0][i][counter] == '1' ? ones++ : zeros++;
+    // oxygen loop
+    while (textArr.length > 1) {
+        for (let i = 0; i < textArr.length; i++) {
+            textArr[i][counter] == '1' ? ones++ : zeros++;
         }
 
-        ones >= zeros ? textArr = o2Co2ArrayCreator('1', counter, textArr) : textArr = o2Co2ArrayCreator('0', counter, textArr)
+        ones >= zeros ? textArr = createO2Array('1', counter, textArr) : textArr = createO2Array('0', counter, textArr)
+
+        counter++;
+        zeros = 0;
+        ones = 0;
+    }
+    oxygen = parseInt(textArr[0], 2);
+
+    console.log(textArr[0])
+    console.log(oxygen);
+    textArr = text.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+
+    // co2 loop
+
+    zeros = 0;
+    ones = 0;
+    counter = 0;
+
+    while (textArr.length > 1) {
+        for (let i = 0; i < textArr.length; i++) {
+            textArr[i][counter] == '1' ? ones++ : zeros++;
+        }
+
+        ones >= zeros ? textArr = createO2Array('0', counter, textArr) : textArr = createO2Array('1', counter, textArr)
 
         counter++;
         zeros = 0;
         ones = 0;
     }
 
-    return textArr;
+    console.log(textArr[0]);
+
+    co2 = parseInt(textArr[0], 2);
+    console.log(co2);
+    return co2 * oxygen;
 }
+
+
 
 // console.log(part1(text));
 console.log(part2(text));
@@ -138,28 +166,12 @@ function createArray(number: number) {
     return arr;
 }
 
-function o2Co2ArrayCreator(string: string, position: number, array: any) {
-    console.log('position: ' + position);
-    console.log('string: ' + string);
-    let returnArr: any = [[], []];
-    if (array[0].length > 1) {
-        for (let i = 0; i < array[0].length; i++) {
-            if (array[0][i][position] == string) {
-                returnArr[0].push(array[0][i]);
-            }
+function createO2Array(string: string, position: number, array: any) {
+    let returnArr: any = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][position] == string) {
+            returnArr.push(array[i]);
         }
-    } else {
-        returnArr[0].push(array[0][0])
     }
-    if (array[1].length > 1) {
-        for (let i = 0; i < array[1].length; i++) {
-            if (array[1][i][position] != string) {
-                returnArr[1].push(array[1][i]);
-            }
-        }
-    } else {
-        returnArr[1].push(array[1][0])
-    }
-    console.log(returnArr);
     return returnArr;
 }
