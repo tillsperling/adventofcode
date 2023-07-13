@@ -1,0 +1,21 @@
+input reader
+
+creator of chosen number array
+
+creator of board arrays
+
+    array consists of 5 numbers
+    array consits of 5 arrays
+    array needs index marked 
+    if either 0-4 are markes bingo
+    or if 5xi is marked bingo
+    need to check for that
+    maybe each array needs an object that log which index is marked 1:2 or 3:1
+
+    takes chosen and checks against the array numbers
+    marker of chosen
+
+need to check score of winning board
+class takes an array of arrays
+class takes last called chosen number
+all unmarked multiplied by chosen number
