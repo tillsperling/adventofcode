@@ -1,4 +1,11 @@
-input reader
+create InputConverter
+    takes text input 
+    first line of input needs to be 1 array
+    
+    the rest gets put in another array with which a class gets initiated that returns an
+    array of arrays, one left to right one top to bottom
+
+
 
 creator of chosen number array
 

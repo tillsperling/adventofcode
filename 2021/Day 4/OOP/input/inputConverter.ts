@@ -8,6 +8,7 @@ export default class InputConverter {
         this.input = input;
     }
 
+
     convertToString() {
         const text = fs.readFileSync(this.input).toString("utf-8");
         const cleanOutput = this.#inputCleaner(text);
@@ -15,6 +16,6 @@ export default class InputConverter {
     }
 
     #inputCleaner(text: string) {
-        return text.replace(/\r/g, "").split("\n");
+        return text.replace(/''|\r/g, "").split("\n");
     }
 }
