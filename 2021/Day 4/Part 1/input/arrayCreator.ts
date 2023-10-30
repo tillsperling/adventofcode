@@ -7,7 +7,7 @@ export default class ArrayCreator {
 
     createDrawnArray() {
         const drawnArrayOfStrings = (this.array[0].split(','))
-        const drawnArrayOfNumbers: Number[] = [];
+        const drawnArrayOfNumbers: number[] = [];
         for (let i = 0; i < drawnArrayOfStrings.length; i++) {
             drawnArrayOfNumbers.push(parseInt(drawnArrayOfStrings[i]))
         }
@@ -20,7 +20,7 @@ export default class ArrayCreator {
     }
 
     createBingoCards() {
-        const bingoCards: any[] = [];
+        const bingoCards: number[][][] = [];
         let cardRow: any[] = [];
         let eachCard: any[] = [];
         for (let i = 0; i < this.array.length; i++) {
