@@ -1,0 +1,16 @@
+wenn x1 und x2 different sind vertikale linie
+wenn x1 und x2 gleich sind horizontale linie
+
+müssen wie groß unser grid ist?
+dafür müssten wir alle x und alle y auswerten und jeweils die größte zahl speichern
+900x900 is komplettes input
+
+linien können von links nach rechts oder rechts nach links
+auch von oben nach unten und unten nach oben
+
+get highest counter
+create array filled with 0
+take list and write function that converts coordinates into array changer where it checks which direction to go
+and changes counts up where coordinates supposed to go
+
+in the end count all array indices >1
