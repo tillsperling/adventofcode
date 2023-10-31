@@ -2,8 +2,8 @@
 import * as fs from "fs";
 
 export default class InputConverter {
-    input;
-    constructor(input) {
+    input: string;
+    constructor(input: string) {
         this.input = input;
     }
     convertToString() {
@@ -11,7 +11,9 @@ export default class InputConverter {
         const cleanOutput = this.#inputCleaner(text);
         return cleanOutput;
     }
-    #inputCleaner(text) {
-        return text.replace(/''|\r/g, "").split("\n");
+    #inputCleaner(text: string) {
+        const lines = text.split("\n");
+        const arrays = lines.map((line) => line.split(/,| -> /)).map((line) => line.map((item) => Number(item.trim())));
+        return arrays;
     }
 }
