@@ -1,8 +1,0 @@
-Input sind horizontale Positionen der Uboote
-Rausfinden an welche horizontale Position alle Moven müssen um sich aufzureihen aber am wenigsten Fuel dafür spenden.
-
-Range ist highert of array to lowest of array, diese beiden werte müssen wir kennen
-
-Wir könnten nun ganz simpel über alle positions loopen und schauen wie viel fuel sie brauchen um dahin zu kommen, das fuel adden wir up, wenn es weniger als die bisher höchste menge ist wirds geupdatet, und die position auch gespeichert
-
-am ende wissen wir welche am günstigsten ist

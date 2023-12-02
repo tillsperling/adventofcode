@@ -1,0 +1,13 @@
+Validation Data erstellen
+    12 red cubes, 
+    13 green cubes, 
+    14 blue cubes
+
+für jedes game ein objekt
+    id
+    reds
+    greens
+    blues
+
+wenn es possible ist IDs addieren
+
