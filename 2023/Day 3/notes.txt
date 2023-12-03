@@ -1,0 +1,14 @@
+Every Line gets parsed
+each number of a line gets put into an object containing
+    the number,
+    the line before it appeared on
+    and the line after it appeared on
+    the first index of the number + 1 
+    the last index of the number + 1
+    information if it is a "part number"
+
+for every object we now parse the whole input
+and check the lines stored in the input if they have a symbol in the range
+
+in the end sum up all the part numbers and ignore the ones that arent
+
