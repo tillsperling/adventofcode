@@ -12,3 +12,15 @@ and check the lines stored in the input if they have a symbol in the range
 
 in the end sum up all the part numbers and ignore the ones that arent
 
+
+Part 2
+
+Find All Gears, but them in object and check in the line above current and belov and the following indices
+gearCurrent - 1
+gearCurrent + 1
+gearBelow - 1
+gearBelow
+gearAbove - 1
+gearAbove
+gearAbove + 1
+mark if Cool

@@ -42,7 +42,6 @@ export default class PartNumberValidator {
                 numberObject.isPartNumber = true;
             }
         }
-        console.log(this.numberObjectArray)
         return this.numberObjectArray
     }
 }
