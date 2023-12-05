@@ -16,8 +16,8 @@ export default class ObjectFactory {
         for (let i = 1; i < this.array.length; i++) {
             const splitted = this.array[i].split(' ');
             const range: RangeObject = {
-                source: parseInt(splitted[0]),
-                destination: parseInt(splitted[1]),
+                source: parseInt(splitted[1]),
+                destination: parseInt(splitted[0]),
                 range: parseInt(splitted[2])
             }
             object.ranges.push(range);

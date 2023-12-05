@@ -1,11 +1,15 @@
 import ObjectFactory from "./ObjectFactory";
+import MapObject from "../types/MapObject";
 
 export default class MapObjectsCreator {
     input: string[];
     dataArray: string[][];
+    allObjects: MapObject[];
+
     constructor(input: string[]) {
         this.input = input;
         this.dataArray = [];
+        this.allObjects = [];
     }
 
     createMapObjects() {
@@ -24,7 +28,8 @@ export default class MapObjectsCreator {
         }
         for (let line of this.dataArray) {
             const object = new ObjectFactory(line).createObject();
-            console.log(object);
+            this.allObjects.push(object);
         }
+        return this.allObjects;
     }
 }
