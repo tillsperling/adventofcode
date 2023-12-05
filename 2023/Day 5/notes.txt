@@ -1,0 +1,33 @@
+Create Array for seeds we have
+
+create objects for
+    - soil
+    - fertilizer
+    - water
+    - light
+    - temperature
+    - humidity
+
+{
+    name
+    Objects
+}
+
+each object has an amount of objects with ranges
+
+object {
+    mapname (soil, seed w/e)
+    src-range: (2nd number)
+    dest-range: (1st number)
+    range: (3rd number)
+}
+
+so we take the seed from initial seed array and check the next object soil if the number is inside a 
+range = 2nd number + 3rd number
+
+if its not in a a range of that object it is equal to itself????
+
+that is then the number we use for the next check, a function could return that so we dont have all the other
+useless shit to worry about
+
+we check again, maybe with a counter to see how far we are we always have to check 7 objects until we get a value
