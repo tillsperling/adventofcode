@@ -31,3 +31,10 @@ that is then the number we use for the next check, a function could return that 
 useless shit to worry about
 
 we check again, maybe with a counter to see how far we are we always have to check 7 objects until we get a value
+
+
+/// PART 2
+
+turning around
+check from location 1 through the objects and if one end seed is inbetween the range we good?
+
