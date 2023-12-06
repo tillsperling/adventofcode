@@ -38,3 +38,7 @@ we check again, maybe with a counter to see how far we are we always have to che
 turning around
 check from location 1 through the objects and if one end seed is inbetween the range we good?
 
+we take the initial seed range and check the next map for its ranges
+we split the seed range into more ranged depending on if they fit into a range or not, the ranges we split into just change like the mapping would have them change
+
+we continue until we come out with a range of locations we log that range and take the smallest from those ranges

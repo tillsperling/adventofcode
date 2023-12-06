@@ -7,7 +7,7 @@ export default class InputConverter {
         this.input = input;
     }
 
-    convertToArray(): string[] {
+    convertToArray() {
         const string = fs.readFileSync(this.input).toString("utf-8");
         const array = string.replace(/\r/g, "").split('\n');
         // remove empty lines
