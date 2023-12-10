@@ -1,0 +1,27 @@
+Day 10 
+
+2D Array traversal
+
+we have to go through arrays in 2 ways to find the furthest points and log the steps it takes to get there
+each step has to know where he comes from so we dont go back
+
+| x array before same index or after same index
+- x element before or after
+L x array before same index & element after
+J x array before same index & element before
+7 x array after same index & element before
+F x array after same index & element after
+. x nothing
+S x Unknown
+
+To find S we have to check its before after array before and array after on the same index
+it has 2 connecting neighbors and if we find them we can figure out what S its
+
+Sort Input into arrays per line
+Find array and index of S
+Figure out S surroundings to define S and its neighbors to know in which directions to start
+
+Start array loop in the first direction we should have a function that does the right thing depending on the tile we encounter
+and the direction we came from which is also the direction we cant go to 
+
+after going one full loop we have the length of the loop thus the farthest away point at 1/2 of the loops length
