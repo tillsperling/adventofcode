@@ -25,3 +25,18 @@ Start array loop in the first direction we should have a function that does the 
 and the direction we came from which is also the direction we cant go to 
 
 after going one full loop we have the length of the loop thus the farthest away point at 1/2 of the loops length
+
+/// PART 2
+
+We create a new map from the input and sort every '.' into it
+
+Key: Index, Value: I
+
+We traverse the maze in a clockwise and check for '.' with the following rules and if we find a '.' we give the index in the map the value O
+
+Right > Above O Bottom I
+Bottom > Right O Left I
+Left > Below O Top I
+Top > Left O Right I
+
+Rewrite so that all that arent true just fill out O so we can count dots that are inside

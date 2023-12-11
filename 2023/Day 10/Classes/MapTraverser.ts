@@ -4,7 +4,8 @@ import StartUtil from "./StartUtil";
 type Direction = keyof Neighbours;
 
 export default class MapTraverser {
-    map: string[][];
+    maze: string[][];
+    map: Map<string, string>;
     start: number[];
     currentPosition: number[];
     previousPosition: number[];
@@ -14,8 +15,9 @@ export default class MapTraverser {
     steps: number;
     loopOver: boolean
 
-    constructor(input: string[][]) {
-        this.map = input;
+    constructor(input: [string[][], Map<string, string>]) {
+        this.maze = input[0];
+        this.map = input[1];
         this.start = [];
         this.currentPosition = [];
         this.previousPosition = [];
@@ -28,20 +30,24 @@ export default class MapTraverser {
 
     getFarthestPoint(): number {
         const startUtil = new StartUtil()
-        this.start = startUtil.findStart(this.map);
+        this.start = startUtil.findStart(this.maze);
         this.currentPosition = this.start;
         this.#traverseMap();
-        return this.steps / 2;
+        console.log(this.map)
+        // part 1
+        // return this.steps / 2;
+        // part 2
+        const inside = this.#countInside();
+        return inside;
     }
 
     #traverseMap(): void {
         this.locations.push(this.start);
         while (true) {
             for (let i = 0; i < this.locations.length; i++) {
-                // console.log('starting loop for ' + this.locations[i])
                 this.steps++;
                 const startUtil = new StartUtil()
-                const neighbours = startUtil.findNeighbours(this.map, this.locations[i]);
+                const neighbours = startUtil.findNeighbours(this.maze, this.locations[i]);
                 const directions = Object.keys(neighbours) as (keyof Neighbours)[];
                 for (let direction of directions) {
                     if (
@@ -56,6 +62,8 @@ export default class MapTraverser {
                             this.currentSymbol = neighbours[direction]
                             this.previousPosition = this.locations[i]
                             this.currentPosition = nextDir
+                            // map alteration
+                            this.map = startUtil.alterMap(this.map, this.currentSymbol, direction, this.previousPosition)
                             this.locations.shift()
                             this.locations.push(nextDir);
                             break
@@ -73,6 +81,8 @@ export default class MapTraverser {
                             this.currentSymbol = neighbours[direction]
                             this.previousPosition = this.locations[i]
                             this.currentPosition = nextDir
+                            // map alteration
+                            this.map = startUtil.alterMap(this.map, this.currentSymbol, direction, this.previousPosition)
                             this.locations.shift()
                             this.locations.push(nextDir);
                             break
@@ -84,6 +94,16 @@ export default class MapTraverser {
                 }
             }
         }
+    }
+
+    #countInside(): number {
+        let inside = 0;
+        for (let [key, value] of this.map) {
+            if (value === 'I') {
+                inside++;
+            }
+        }
+        return inside;
     }
 
     #setNextDirection(direction: string): number[] {
