@@ -6,7 +6,6 @@ export default class InputConverter {
     instructions: number[][];
     constructor(input: string) {
         this.input = input;
-        this.instructions = [];
     }
 
     convertToArray(): [string[][], Map<string, string>] {
