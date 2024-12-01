@@ -13,3 +13,16 @@ export const gcd = (a: number, b: number): number => (a ? gcd(b % a, a) : b);
  * @param b
  */
 export const lcm = (a: number, b: number): number => (a * b) / gcd(a, b);
+
+/**
+ * Sorts a number array from lowest to highest number and returns it
+ * @param arr: number[]
+ * @returns number[]
+ */
+export function sortArrayLowToHigh(arr: number[]) {
+    return arr.sort((a, b) => a - b);
+}
+
+export function sumUpArray(arr: number[]) {
+    return arr.reduce((acc, curr) => acc + curr)
+}
