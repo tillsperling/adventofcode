@@ -7,5 +7,7 @@ export default class InputConverter {
         this.input = input;
     }
 
-
+    #turnInputIntoString(): string {
+        return fs.readFileSync(this.input).toString("utf-8");
+    }
 }
