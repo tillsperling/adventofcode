@@ -81,8 +81,6 @@ export default class RuleChecker {
          * if the block is valid we end the recursion
          * */
         for (let block of this.faultyPageBlocks) {
-            console.log(`checking block: ${block}`);
-
             let [faultyIndex, isFaulty] = this.#findFaultAndIndex(block);
             this.#recursion(this.#moveFaultyIndexToNextIndex(block, faultyIndex), isFaulty);
         }
