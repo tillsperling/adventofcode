@@ -1,5 +1,5 @@
 import { RulesAndPages } from "../Types/RulesAndPages"
-import { sumUpArray } from "../../../utils/utils"
+import { sumUpArray, getCenterOfArray } from "../../../utils/utils"
 
 export default class RuleChecker {
     input: RulesAndPages
@@ -45,7 +45,7 @@ export default class RuleChecker {
                     break;
                 }
             }
-            if (rulesApply) this.centerOfArrays.push(this.#getCenterOfArray(pageBlock));
+            if (rulesApply) this.centerOfArrays.push(getCenterOfArray(pageBlock));
         }
     }
 
@@ -65,11 +65,6 @@ export default class RuleChecker {
             }
         }
         return rulesApply;
-    }
-
-    #getCenterOfArray(arr): number {
-        const center = arr[Math.floor(arr.length / 2)];
-        return center
     }
 
     #reorderFaultyPageBlocks() {
@@ -92,7 +87,7 @@ export default class RuleChecker {
             const movedArray = this.#moveFaultyIndexToNextIndex(arr, faultyIndex);
             this.#recursion(movedArray, isFaulty);
         } else {
-            this.centerOfCorrectedArrays.push(this.#getCenterOfArray(arr));
+            this.centerOfCorrectedArrays.push(getCenterOfArray(arr));
         }
     }
 
