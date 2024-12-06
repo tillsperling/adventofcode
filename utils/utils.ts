@@ -26,3 +26,8 @@ export function sortArrayLowToHigh(arr: number[]) {
 export function sumUpArray(arr: number[]) {
     return arr.reduce((acc, curr) => acc + curr)
 }
+
+export function getCenterOfArray(arr): number {
+    const center = arr[Math.floor(arr.length / 2)];
+    return center
+}
