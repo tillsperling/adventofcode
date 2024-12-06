@@ -32,8 +32,7 @@ export default class InfiniteLoopCreator {
 
     init() {
         this.#moveGuard(this.initialGuardPosition, this.currentDirection);
-        // console.log(this.visitedPositions)
-        console.log(`Total Loops Part Two: ${this.loops}`);
+        return this.loops;
     }
 
     #moveGuard(start, direction) {
@@ -42,7 +41,6 @@ export default class InfiniteLoopCreator {
         this.pathAlreadyWalked.add(`${start[0]}:${start[1]}`)
         while (stack.length > 0) {
             const { position, direction } = stack.pop();
-            // this.#markPosition(position);
 
             let [row, col] = position;
             let [rowMove, colMove] = this.directionCoordinates[direction];
@@ -55,24 +53,18 @@ export default class InfiniteLoopCreator {
             }
 
             this.visitedPositions = new Set();
+            this.loopDirection = this.currentDirection;
             this.#placeObstruction(position, this.currentDirection);
             this.#checkIfLoop(position, this.currentDirection);
 
-            if (this.#checkForWall(newCoordinates)) {
+            let nextIsWall = this.#checkForWall(newCoordinates);
+            while (nextIsWall) {
                 this.#turnDirection(this.currentDirection);
                 [rowMove, colMove] = this.directionCoordinates[this.currentDirection];
                 newRow = row + rowMove;
                 newCol = col + colMove;
                 newCoordinates = [newRow, newCol];
-                if (this.#checkForWall(newCoordinates)) {
-                    // console.log(`wall in front and to the right at ${newRow}, ${newCol}`)
-                    this.#turnDirection(this.currentDirection);
-                    [rowMove, colMove] = this.directionCoordinates[this.currentDirection];
-                    newRow = row + rowMove;
-                    newCol = col + colMove;
-                    newCoordinates = [newRow, newCol];
-                }
-
+                nextIsWall = this.#checkForWall(newCoordinates);
             }
 
             this.pathAlreadyWalked.add(`${row}:${col}`)
@@ -113,7 +105,6 @@ export default class InfiniteLoopCreator {
         } else {
             this.currentDirection = "up";
         }
-        // console.log(`Turning to ${this.currentDirection}`);
     }
 
     #turnLoopDirection(currentDirection) {
@@ -131,9 +122,6 @@ export default class InfiniteLoopCreator {
 
     #checkIfLoop(coordinates, direction) {
         this.loopDirection = direction;
-        // console.log(`starting loop with initial direction ${direction}`)
-        // we place an obstruction at the next position of the guard
-
         // we move the guard to the next position
         this.#moveGuardInLoop(coordinates, direction);
 
@@ -149,68 +137,42 @@ export default class InfiniteLoopCreator {
         let newCol = col + colMove;
         let newCoordinates = [newRow, newCol];
 
-        if (this.initialGuardPosition[0] === newRow && this.initialGuardPosition[1] === newCol) {
-            console.log(`initial guard position at ${newRow}, ${newCol}`)
-            return;
-        }
+        let nextIsWall = this.#checkForWall(newCoordinates);
 
-
-        if (this.pathAlreadyWalked.has(`${newRow}:${newCol}`)) {
-            console.log(`path already walked at ${newRow}, ${newCol}`)
-            return;
-        }
-
-        if (this.arrays[newRow][newCol] === "#") {
-            // console.log(`wall at ${newRow}, ${newCol}`)
+        while (nextIsWall) {
             this.#turnLoopDirection(this.loopDirection);
             [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
             newRow = row + rowMove;
             newCol = col + colMove;
             newCoordinates = [newRow, newCol];
-            if (this.arrays[newRow][newCol] === "#") {
-                // console.log(`wall at ${newRow}, ${newCol}`)
-                this.#turnLoopDirection(this.loopDirection);
-                [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                newRow = row + rowMove;
-                newCol = col + colMove;
-                newCoordinates = [newRow, newCol];
-                if (this.arrays[newRow][newCol] === "#") {
-                    // console.log(`wall at ${newRow}, ${newCol}`)
-                    this.#turnLoopDirection(this.loopDirection);
-                    [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                    newRow = row + rowMove;
-                    newCol = col + colMove;
-                    newCoordinates = [newRow, newCol];
-                    if (this.arrays[newRow][newCol] === "#") {
-                        // console.log(`wall at ${newRow}, ${newCol}`)
-                        this.#turnLoopDirection(this.loopDirection);
-                        [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                        newRow = row + rowMove;
-                        newCol = col + colMove;
-                        newCoordinates = [newRow, newCol];
-                    }
-                }
-            }
+            nextIsWall = this.#checkForWall(newCoordinates);
+        }
+
+        if (this.pathAlreadyWalked.has(`${newRow}:${newCol}`)) {
+            return;
+        }
+
+        if (this.initialGuardPosition[0] === newRow && this.initialGuardPosition[1] === newCol) {
+            return;
         }
 
         this.obstructionCoordinates = newCoordinates;
-        this.arrays[newRow][newCol] = "#";
-        console.log(`placing obstruction at ${newRow}, ${newCol}`)
+        if (this.arrays[newRow][newCol] != "^") {
+            this.arrays[newRow][newCol] = "#";
+        }
     }
 
     #removeObstruction(coordinates) {
         let [row, col] = coordinates;
-        // console.log(`removing obstruction at ${row}, ${col}`)
         this.arrays[row][col] = ".";
     }
 
     #moveGuardInLoop(start, direction) {
         const stack = [{ position: start, direction }];
 
-
         while (stack.length > 0) {
-            const { position, direction } = stack.pop();
 
+            const { position, direction } = stack.pop();
 
             let [row, col] = position;
             let [rowMove, colMove] = this.directionCoordinates[direction];
@@ -218,60 +180,34 @@ export default class InfiniteLoopCreator {
             let newCol = col + colMove;
             let newCoordinates = [newRow, newCol];
 
-            // if we go out of bounds we end the loop and remove the obstruction
             if (this.#isOutOfBounds(newCoordinates)) {
-                // console.log(`out of bounds, removing obstruction ar ${this.obstructionCoordinates}`)
                 continue;
             }
 
+            let nextIsWall = this.#checkForWall(newCoordinates);
+            while (nextIsWall) {
+                this.#turnLoopDirection(this.loopDirection);
+                [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
+                newRow = row + rowMove;
+                newCol = col + colMove;
+                newCoordinates = [newRow, newCol];
+                nextIsWall = this.#checkForWall(newCoordinates);
+            }
+
             const positionString = `${position[0]}:${position[1]}:${direction}`
-            // console.log(`checking ${this.visitedPositions} for ${positionString}`)
             if (this.visitedPositions.has(positionString)) {
-                console.log(`loop detected at ${positionString}`)
-                console.log('obstruction coordinates', this.obstructionCoordinates)
                 this.loops++;
                 continue;
             }
 
             this.visitedPositions.add(positionString);
 
-            if (this.#checkForWall(newCoordinates)) {
-                // console.log(`wall atta ${newRow}, ${newCol}`)
-                this.#turnLoopDirection(this.loopDirection);
-                [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                newRow = row + rowMove;
-                newCol = col + colMove;
-                newCoordinates = [newRow, newCol];
-                if (this.#checkForWall(newCoordinates)) {
-                    // console.log(`wall already at ${newRow}, ${newCol}`)
-                    this.#turnLoopDirection(this.loopDirection);
-                    [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                    newRow = row + rowMove;
-                    newCol = col + colMove;
-                    newCoordinates = [newRow, newCol];
-                    if (this.#checkForWall(newCoordinates)) {
-                        // console.log(`wall already at ${newRow}, ${newCol}`)
-                        this.#turnLoopDirection(this.loopDirection);
-                        [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                        newRow = row + rowMove;
-                        newCol = col + colMove;
-                        newCoordinates = [newRow, newCol];
-                        if (this.#checkForWall(newCoordinates)) {
-                            // console.log(`wall already at ${newRow}, ${newCol}`)
-                            this.#turnLoopDirection(this.loopDirection);
-                            [rowMove, colMove] = this.directionCoordinates[this.loopDirection];
-                            newRow = row + rowMove;
-                            newCol = col + colMove;
-                            newCoordinates = [newRow, newCol];
-                        }
-                    }
-                }
-            }
-
             if (!this.#isOutOfBounds(newCoordinates)) {
                 stack.push({ position: newCoordinates, direction: this.loopDirection });
             }
         }
+        this.#removeObstruction(this.obstructionCoordinates);
     }
+
 
 }

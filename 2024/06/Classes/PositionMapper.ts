@@ -22,7 +22,7 @@ export default class PositionMapper {
 
     init() {
         this.#moveGuard(this.initialGuardPosition, this.currentDirection);
-        console.log(`Total Positions Visited Part One: ${this.moves}`);
+        return this.moves;
     }
 
     #moveGuard(start, direction) {
@@ -80,7 +80,6 @@ export default class PositionMapper {
     #checkForWall(coordinates) {
         let [row, col] = coordinates;
         if (this.arrays[row][col] === "#") {
-            // console.log(`Wall at ${row}, ${col}`);
             return true;
         }
     }
@@ -95,6 +94,5 @@ export default class PositionMapper {
         } else {
             this.currentDirection = "up";
         }
-        // console.log(`Turning to ${this.currentDirection}`);
     }
 }

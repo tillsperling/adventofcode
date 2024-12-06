@@ -13,10 +13,11 @@ const infiniteLoopCreator = new InfiniteLoopCreator(partOne);
 
 
 function solvePart1() {
-    positionMapperOne.init();
+    console.log(`Total Positions Visited Part One: ${positionMapperOne.init()}`);
+
 };
 function solvePart2() {
-    infiniteLoopCreator.init();
+    console.log(`Total Loops Part Two: ${infiniteLoopCreator.init()}`);
 };
 
 solvePart1();
