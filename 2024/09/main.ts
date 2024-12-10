@@ -58,5 +58,5 @@ function solvePart2() {
     console.log(`Time Part 2: ${Date.now() - start}ms`)
 };
 
-// solvePart1();
+solvePart1();
 solvePart2();

@@ -59,7 +59,7 @@ export default class GigaFileSystemHandler {
                 const indices = this.#findIdArraysIndices(idArray)
                 const [emptySpace, emptySpaceIndices] = this.#findFittingEmptySpace(indices)
                 if (emptySpace.length >= idArray.length) {
-                    this.#spliceInFileSystem(idArray, indices, emptySpace, emptySpaceIndices)
+                    this.#spliceInFileSystem(idArray, indices, emptySpaceIndices)
                 }
                 this.idArray.pop()
             }
@@ -83,7 +83,6 @@ export default class GigaFileSystemHandler {
     }
 
     #findFittingEmptySpace(indices: number[]): [(string | number)[], number[]] {
-        // if index of empty space is behind the index of the idArray we cant use it and have to return
         const emptySpace: (string | number)[] = []
         const emptySpaceIndices: number[] = []
         const firstIndex = indices[indices.length - 1]
@@ -106,7 +105,7 @@ export default class GigaFileSystemHandler {
         return [emptySpace, emptySpaceIndices]
     }
 
-    #spliceInFileSystem(idArray, idArrayIndices, emptySpace, emptySpaceIndices) {
+    #spliceInFileSystem(idArray, idArrayIndices, emptySpaceIndices) {
         for (let i = 0; i < emptySpaceIndices.length; i++) {
             this.fileSystem[emptySpaceIndices[i]] = idArray[i]
         }
