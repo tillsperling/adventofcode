@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
+        "target": "es2023",
         "esModuleInterop": true,
-        "skipLibCheck": true,
         "strict": true,
         "outDir": "./dist",
         "rootDir": "./src",
         "resolveJsonModule": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "lib": ["es2023", "dom"]
     },
     "include": [
         "src/**/*"

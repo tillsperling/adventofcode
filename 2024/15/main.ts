@@ -23,12 +23,37 @@
  * 
  */
 
+/**
+ * Notes 2 
+ * 
+ * Input stays the same, but the interpretation changes and the handling of moving crates
+ * 
+ * each element except for the robot doubles in size
+ * 
+ * if for every wall encountered another wall is put into map next to it we will have all the walls
+ * 
+ * if for every empty space we encounter another empty space is put next to it we have all empty spaces
+ * 
+ * we have to add one extra empty space after our robot
+ * 
+ * for the boxes its gonna be harder as one box is a pair now and they cnat disconnect
+ * 
+ * boxes now get a key of boxPos1 and boxPos2,
+ * in all the checks for the movementsimulator we have to check if any of boxPos1 or boxPost2 + nextpos affects anohters boxPos1 or boxPos2
+ * 
+ */
+
 import InputConverter from "./Classes/InputConverter";
 import MovementSimulator from "./Classes/MovementSimulator";
+import BiggerMovementSimulator from "./Classes/BiggerMovementSimulator";
 
 const inputConverter = new InputConverter('./input.txt')
 const [coordinates, walls, boxes, empty, robot] = inputConverter.convert();
 const movementSimulator = new MovementSimulator(coordinates, walls, boxes, empty, robot)
+
+const inputConverterPartTwo = new InputConverter('./input.txt')
+const [coordinatesTwo, wallsTwo, boxesTwo, emptyTwo, robotTwo] = inputConverterPartTwo.convertPartTwo();
+const biggerMovementSimulator = new BiggerMovementSimulator(coordinatesTwo, wallsTwo, boxesTwo, emptyTwo, robotTwo)
 
 function solvePart1() {
     // const start = Date.now();
@@ -37,9 +62,9 @@ function solvePart1() {
 };
 function solvePart2() {
     // const start = Date.now();
-
+    console.log(biggerMovementSimulator.simulateMoves())
     // console.log(`Time Part 2: ${Date.now() - start}ms`)
 };
 
-solvePart1();
-// solvePart2();
+// solvePart1();
+solvePart2();
