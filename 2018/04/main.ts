@@ -73,11 +73,19 @@ const createGuards = (): { [id: number]: Guard } => {
     }
 
     if (guardId != 0) {
-        if (guards[guardId]) {
-            guards[guardId].totalSleep += guard.totalSleep;
-            guards[guardId].minutesAsleep = [...guards[guardId].minutesAsleep, ...guard.minutesAsleep];
-        } else {
-            guards[guardId] = {totalSleep: guard.totalSleep, minutesAsleep: guard.minutesAsleep};
+        if (sleepArr.length > 0) {
+            let sleepTime = 0;
+            for (let i = sleepArr.length - 1; i >= 1; i--) {
+                if (i % 2 === 0) continue;
+                sleepTime += sleepArr[i] - sleepArr[i - 1];
+            }
+            const minutes = computeAllMinutesAsleep(sleepArr);
+            if (guards[guardId]) {
+                guards[guardId].totalSleep += sleepTime;
+                guards[guardId].minutesAsleep = [...guards[guardId].minutesAsleep, ...minutes];
+            } else {
+                guards[guardId] = {totalSleep: sleepTime, minutesAsleep: minutes};
+            }
         }
     }
 
@@ -96,30 +104,53 @@ const findHighestAmountOfMinutes = (arr: number[]) => {
         }
     }
 
-    return minute
+    return {minute, amount}
 }
 
-const part1 = () => {
-    const solutionArr: number[] = [0, 0]
+const findGuardAsleepAtTheSameTimeMostFuckFunctionNames = (guards: { [id: number]: Guard }): {
+    guardId: number,
+    minute: number
+    amount: number
+} => {
+    let minute: number = 0;
+    let guardId: number = 0;
+    let amount: number = 0;
+    for (const [key, value] of Object.entries(guards)) {
+        const {minute: check, amount: checkAmount} = findHighestAmountOfMinutes(value.minutesAsleep)
+        if (checkAmount > amount) {
+            minute = check;
+            guardId = parseInt(key);
+            amount = checkAmount
+        }
+    }
+    return {guardId, minute, amount}
+}
+
+const part1And2 = () => {
+    const solutionArrPart1: number[] = [0, 0]
     let solution: number = 0;
 
     sortList();
 
-    const guards = createGuards()
+    const guards: { [id: number]: Guard } = createGuards()
 
     for (const [key, value] of Object.entries(guards)) {
         const id = parseInt(key);
         const totalSleep = value.totalSleep
-        if (totalSleep > solutionArr[1]) {
-            solutionArr[0] = id;
-            solutionArr[1] = totalSleep;
+        if (totalSleep > solutionArrPart1[1]) {
+            solutionArrPart1[0] = id;
+            solutionArrPart1[1] = totalSleep;
         }
     }
 
-    const guardThatsMostAsleep = guards[solutionArr[0]]
-    const minute = findHighestAmountOfMinutes(guardThatsMostAsleep.minutesAsleep)
-    solution = solutionArr[0] * minute
+    const guardThatsMostAsleep = guards[solutionArrPart1[0]]
+    const {minute} = findHighestAmountOfMinutes(guardThatsMostAsleep.minutesAsleep)
+    
+    solution = solutionArrPart1[0] * minute
     console.log(`Part 1: ${solution}`)
+
+    const {guardId, minute: minutePart2} = findGuardAsleepAtTheSameTimeMostFuckFunctionNames(guards)
+    console.log(`Part 2: ${guardId * minutePart2}`)
 }
 
-part1()
+part1And2()
