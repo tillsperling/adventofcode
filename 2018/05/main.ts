@@ -19,6 +19,13 @@
  *
  * we also need to do this in a recursive function where the break condition is if no adjacent pairs are present
  * in the string
+ *
+ * this is a bruteforce of the task
+ * a better solution seems to be to avoid regex and avoid replacing in a loop
+ * i could just use a function that pushes the current char into an array and checks if the next char reacts
+ * to it as decribed in the problem. if so it gets popped, after that is done the array containing chars
+ * gets joined to a string
+ *
  */
 //@ts-ignore
 import * as fs from "fs";
