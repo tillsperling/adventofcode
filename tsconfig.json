@@ -1,16 +1,11 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2023",
-        "esModuleInterop": true,
-        "strict": true,
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "resolveJsonModule": true,
-        "moduleResolution": "node",
-        "lib": ["es2023", "dom"]
-    },
-    "include": [
-        "src/**/*"
-    ]
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "./"
+  ]
 }
