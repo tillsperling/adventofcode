@@ -1,16 +1,16 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
     instructions: number[][];
+
     constructor(input: string) {
         this.input = input;
     }
 
     convertToArray(): any[][] {
-        const string = fs.readFileSync(this.input).toString("utf-8");
-        const stringArray = string.replace(/\r/g, "").split('\n');
+        const string = fs.readFileSync(this.input).toString('utf-8');
+        const stringArray = string.replace(/\r/g, '').split('\n');
         const cardArray: any[][] = [];
         for (let i = 0; i < stringArray.length; i++) {
             const element: string[] = stringArray[i].split(' ');
@@ -25,11 +25,9 @@ export default class InputConverter {
                     card = '11';
                 } else if (card === 'Q') {
                     card = '12';
-                }
-                else if (card === 'K') {
+                } else if (card === 'K') {
                     card = '13';
-                }
-                else if (card === 'A') {
+                } else if (card === 'A') {
                     card = '14';
                 }
                 handArray.push(parseInt(card));

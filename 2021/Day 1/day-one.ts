@@ -1,15 +1,14 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 // Handle input.txt and create array.
-const text = fs.readFileSync("./input1.txt").toString("utf-8");
+const text = fs.readFileSync('./input1.txt').toString('utf-8');
 // Sonar detects the depths around the submarine. 
 // Count how often the depths gets deeper than the deepest before. 
 // Return amount of times
 
 // Put depths in array
 function part1(input: string) {
-    let textArr = input.toString().replace(/\r/g, "").split("\n");
+    const textArr = input.toString().replace(/\r/g, '').split('\n');
     let ans: number = 0;
     let placeholder: number = 0;
     for (let i = 0; i < textArr.length; i++) {
@@ -29,7 +28,7 @@ function part1(input: string) {
 }
 
 function part2(input: string) {
-    let textArr = text.toString().replace(/\r/g, "").split("\n");
+    const textArr = text.toString().replace(/\r/g, '').split('\n');
     let ans: number = 0;
     let placeholder1: number = 0;
     let placeholder2: number = 0;
@@ -43,5 +42,6 @@ function part2(input: string) {
 
     return ans;
 }
+
 // console.log(part1(text1));
 console.log(part2(text));

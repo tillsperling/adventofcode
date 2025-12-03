@@ -1,21 +1,21 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
+
     constructor(input: string) {
         this.input = input;
     }
 
     convertToArray() {
-        const string = fs.readFileSync(this.input).toString("utf-8");
-        const array: string[] = string.replace(/\r/g, "").split('\n');
+        const string = fs.readFileSync(this.input).toString('utf-8');
+        const array: string[] = string.replace(/\r/g, '').split('\n');
         const stringArray: string[][] = [];
-        for (let string of array) {
+        for (const string of array) {
             stringArray.push(string.split(''));
         }
-        this.#expand(stringArray)
-        const galaxyMap = this.#createGalaxyMap(stringArray)
+        this.#expand(stringArray);
+        const galaxyMap = this.#createGalaxyMap(stringArray);
         return galaxyMap;
     }
 
@@ -32,8 +32,8 @@ export default class InputConverter {
             }
             if (empty) {
                 const newArray = Array(row.length).fill('.');
-                array.splice(i, 0, newArray)
-                i++
+                array.splice(i, 0, newArray);
+                i++;
             }
         }
         // expand vertically
@@ -49,7 +49,7 @@ export default class InputConverter {
                 for (let j = 0; j < array.length; j++) {
                     array[j].splice(i, 0, '.');
                 }
-                i++
+                i++;
             }
         }
     }

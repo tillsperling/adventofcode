@@ -4,7 +4,6 @@
  * create array of invalid ids where we push to if found
  * make strings ToInt and sum up
  */
-//@ts-expect-error cant find fs
 import * as fs from 'fs';
 import { sumUpArray } from '../../utils/utils';
 
@@ -94,7 +93,7 @@ const part2 = () => {
 const isInvalidEven = (string: string): boolean => {
     const length: number = string.length;
     const middle: number = Math.round(length / 2);
-    
+
     for (let i = 1; i <= middle; i++) {
         const pattern = string.slice(0, i);
         const regex = new RegExp(String.raw`^(${pattern})+$`, 'g');

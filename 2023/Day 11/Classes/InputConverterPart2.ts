@@ -1,5 +1,4 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
@@ -8,19 +7,19 @@ export default class InputConverter {
 
     constructor(input: string) {
         this.input = input;
-        this.expandedRows = []
-        this.expandedColumns = []
+        this.expandedRows = [];
+        this.expandedColumns = [];
     }
 
     convertToArray(): [Map<string, string>, number[], number[]] {
-        const string = fs.readFileSync(this.input).toString("utf-8");
-        const array: string[] = string.replace(/\r/g, "").split('\n');
+        const string = fs.readFileSync(this.input).toString('utf-8');
+        const array: string[] = string.replace(/\r/g, '').split('\n');
         const stringArray: string[][] = [];
-        for (let string of array) {
+        for (const string of array) {
             stringArray.push(string.split(''));
         }
-        this.#expand(stringArray)
-        const galaxyMap = this.#createGalaxyMap(stringArray)
+        this.#expand(stringArray);
+        const galaxyMap = this.#createGalaxyMap(stringArray);
         return [galaxyMap, this.expandedRows, this.expandedColumns];
     }
 
@@ -36,8 +35,8 @@ export default class InputConverter {
                 }
             }
             if (empty) {
-                this.expandedColumns.push(i)
-                i++
+                this.expandedColumns.push(i);
+                i++;
             }
         }
         // expand vertically
@@ -50,8 +49,8 @@ export default class InputConverter {
                 }
             }
             if (empty) {
-                this.expandedRows.push(i)
-                i++
+                this.expandedRows.push(i);
+                i++;
             }
         }
     }

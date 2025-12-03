@@ -1,28 +1,27 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 interface Rotation {
     direction: string;
     amount: number;
 }
 
-const input: string[] = fs.readFileSync('./input.txt', 'utf-8').toString().replace(/\r/g, ' ').split('\n')
+const input: string[] = fs.readFileSync('./input.txt', 'utf-8').toString().replace(/\r/g, ' ').split('\n');
 const cords: Rotation[] = [];
 
 for (const element of input) {
     const rotation: Rotation = {
         direction: element[0],
-        amount: parseInt(element.slice(1))
-    }
+        amount: parseInt(element.slice(1)),
+    };
 
-    cords.push(rotation)
+    cords.push(rotation);
 }
 
 const part1 = () => {
     let dialNumber = 50;
     let result = 0;
 
-    for(const rotation of cords){
+    for (const rotation of cords) {
         if (rotation.direction === 'R') {
             for (let i = 0; i < rotation.amount; i++) {
                 dialNumber += 1;
@@ -39,7 +38,7 @@ const part1 = () => {
     }
 
     console.log(result);
-}
+};
 
 const part2 = () => {
     let dialNumber = 50;
@@ -62,7 +61,7 @@ const part2 = () => {
     }
 
     console.log(result);
-}
+};
 
-part1()
-part2()
+part1();
+part2();

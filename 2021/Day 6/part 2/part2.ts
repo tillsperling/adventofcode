@@ -1,7 +1,6 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
-const fishArray = fs.readFileSync("../input.txt").toString("utf-8").split(',').map(item => parseInt(item));
+const fishArray = fs.readFileSync('../input.txt').toString('utf-8').split(',').map(item => parseInt(item));
 const lifecycle = 6;
 
 const queue = Array(9).fill(0);

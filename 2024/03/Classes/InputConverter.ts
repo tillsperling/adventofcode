@@ -1,8 +1,8 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
+
     constructor(input: string) {
         this.input = input;
     }
@@ -10,8 +10,8 @@ export default class InputConverter {
     arrangeInputPartOne(): number[][] {
         const string = this.#turnInputIntoString();
         const regex = /mul\(\d{1,3}\,\d{1,3}\)/g;
-        const commands = string.match(regex)
-        return this.#returnMultiplyArrays(commands)
+        const commands = string.match(regex);
+        return this.#returnMultiplyArrays(commands);
     }
 
     arrangeInputPartTwo(): number[][] {
@@ -25,16 +25,17 @@ export default class InputConverter {
     }
 
     #turnInputIntoString(): string {
-        return fs.readFileSync(this.input).toString("utf-8").replace(/(\r\n|\n|\r)/gm, "");;
+        return fs.readFileSync(this.input).toString('utf-8').replace(/(\r\n|\n|\r)/gm, '');
+        
     }
 
     #returnMultiplyArrays(arr): number[][] {
         const commandArr: number[][] = [];
-        for (let command of arr) {
-            let cleanCommand = command.replace(/mul\((.*?)\)/, "$1")
-            const singleCommand = cleanCommand.split(',').map(element => parseInt(element))
+        for (const command of arr) {
+            const cleanCommand = command.replace(/mul\((.*?)\)/, '$1');
+            const singleCommand = cleanCommand.split(',').map(element => parseInt(element));
             commandArr.push(singleCommand);
         }
-        return commandArr
+        return commandArr;
     }
 }

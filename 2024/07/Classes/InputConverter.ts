@@ -1,35 +1,34 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
-    solutionsAndEquation: number[][][]
+    solutionsAndEquation: number[][][];
 
     constructor(input: string) {
         this.input = input;
-        this.solutionsAndEquation = []
+        this.solutionsAndEquation = [];
     }
 
     createArrays(): number[][][] {
         const string = this.#turnInputIntoString();
-        const arrays = string.replace(/\r|:/g, "").split("\n")
-        const subArrays = arrays.map((element) => element.split(' '))
+        const arrays = string.replace(/\r|:/g, '').split('\n');
+        const subArrays = arrays.map((element) => element.split(' '));
 
-        for (let arr of subArrays) {
+        for (const arr of subArrays) {
             const equation: number[][] = [];
-            let result = [parseInt(arr.shift())];
-            let numbers = arr.map((element) => parseInt(element))
+            const result = [parseInt(arr.shift())];
+            const numbers = arr.map((element) => parseInt(element));
 
-            equation.push(result)
-            equation.push(numbers)
+            equation.push(result);
+            equation.push(numbers);
 
-            this.solutionsAndEquation.push(equation)
+            this.solutionsAndEquation.push(equation);
         }
 
-        return this.solutionsAndEquation
+        return this.solutionsAndEquation;
     }
 
     #turnInputIntoString(): string {
-        return fs.readFileSync(this.input).toString("utf-8");
+        return fs.readFileSync(this.input).toString('utf-8');
     }
 }

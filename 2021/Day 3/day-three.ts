@@ -1,5 +1,4 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 /*  Notes Part 1
     
@@ -42,17 +41,17 @@ import * as fs from "fs";
 */
 
 // Handle input.txt and create array.
-const text = fs.readFileSync("./input1.txt").toString("utf-8");
+const text = fs.readFileSync('./input1.txt').toString('utf-8');
 
 function part1(input: string) {
     // splitting into array of each number
-    let textArr = input.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    const textArr = input.toString().replace(/\r/g, ' ').replace(/\n/g, '').split(' ');
     const numberOfArraysNeeded: number = textArr[0].length;
-    let gammaArr: any = [];
-    let epsilonArr: any = [];
+    const gammaArr: any = [];
+    const epsilonArr: any = [];
 
     // creating a array that holds all the created arrays
-    let horizontalArr: any = createArray(numberOfArraysNeeded);
+    const horizontalArr: any = createArray(numberOfArraysNeeded);
 
     // fill horizontals array
     for (let i = 0; i < textArr.length; i++) {
@@ -89,15 +88,15 @@ function part1(input: string) {
         }
     }
 
-    let gamma = parseInt(gammaArr.join(''), 2);
-    let epsilon = parseInt(epsilonArr.join(''), 2);
+    const gamma = parseInt(gammaArr.join(''), 2);
+    const epsilon = parseInt(epsilonArr.join(''), 2);
 
     return gamma * epsilon;
 }
 
 function part2(input: string) {
     // creating array
-    let textArr = input.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    let textArr = input.toString().replace(/\r/g, ' ').replace(/\n/g, '').split(' ');
     let oxygen: any = [];
     let co2: any = [];
 
@@ -112,7 +111,7 @@ function part2(input: string) {
             textArr[i][counter] == '1' ? ones++ : zeros++;
         }
 
-        ones >= zeros ? textArr = createO2Array('1', counter, textArr) : textArr = createO2Array('0', counter, textArr)
+        ones >= zeros ? textArr = createO2Array('1', counter, textArr) : textArr = createO2Array('0', counter, textArr);
 
         counter++;
         zeros = 0;
@@ -120,9 +119,9 @@ function part2(input: string) {
     }
     oxygen = parseInt(textArr[0], 2);
 
-    console.log(textArr[0])
+    console.log(textArr[0]);
     console.log(oxygen);
-    textArr = text.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    textArr = text.toString().replace(/\r/g, ' ').replace(/\n/g, '').split(' ');
 
     // co2 loop
 
@@ -135,7 +134,7 @@ function part2(input: string) {
             textArr[i][counter] == '1' ? ones++ : zeros++;
         }
 
-        ones >= zeros ? textArr = createO2Array('0', counter, textArr) : textArr = createO2Array('1', counter, textArr)
+        ones >= zeros ? textArr = createO2Array('0', counter, textArr) : textArr = createO2Array('1', counter, textArr);
 
         counter++;
         zeros = 0;
@@ -150,14 +149,12 @@ function part2(input: string) {
 }
 
 
-
 // console.log(part1(text));
 console.log(part2(text));
 
 
-
 function createArray(number: number) {
-    let arr: any = [];
+    const arr: any = [];
 
     for (let i = 0; i < number; i++) {
         arr.push([]);
@@ -167,7 +164,7 @@ function createArray(number: number) {
 }
 
 function createO2Array(string: string, position: number, array: any) {
-    let returnArr: any = [];
+    const returnArr: any = [];
     for (let i = 0; i < array.length; i++) {
         if (array[i][position] == string) {
             returnArr.push(array[i]);

@@ -1,14 +1,13 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 // Handle input.txt and create array.
-const text = fs.readFileSync("./input1.txt").toString("utf-8");
+const text = fs.readFileSync('./input1.txt').toString('utf-8');
 
 function part1(input: string) {
     // splitting instruction in array [direction, value], [direction, value]
-    let textArr = input.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    const textArr = input.toString().replace(/\r/g, ' ').replace(/\n/g, '').split(' ');
     let placeholderArr: any = [];
-    let finalArr: any = [];
+    const finalArr: any = [];
     // putting each command in a single array
     for (let i: number = 0; i < textArr.length; i++) {
         // wenn placeholder leer push string
@@ -51,12 +50,11 @@ function part1(input: string) {
 }
 
 
-
 function part2(input: string) {
     // splitting instruction in array [direction, value], [direction, value]
-    let textArr = input.toString().replace(/\r/g, " ").replace(/\n/g, "").split(" ")
+    const textArr = input.toString().replace(/\r/g, ' ').replace(/\n/g, '').split(' ');
     let placeholderArr: any = [];
-    let finalArr: any = [];
+    const finalArr: any = [];
     // putting each command in a single array
     for (let i: number = 0; i < textArr.length; i++) {
         // wenn placeholder leer push string
@@ -99,7 +97,6 @@ function part2(input: string) {
     }
     return horizontal * depth;
 }
-
 
 
 // console.log(part1(text));

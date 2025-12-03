@@ -27,15 +27,14 @@
  * gets joined to a string
  *
  */
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 const input: string = fs
     .readFileSync('./input.txt', 'utf-8')
     .replace(/\r?\n/g, '')
     .trim();
 
-let part1Solution: number = 0;
+const part1Solution: number = 0;
 
 const removeFirstAdjacentPolarity = (string: string) => {
     let newString = string;
@@ -47,23 +46,23 @@ const removeFirstAdjacentPolarity = (string: string) => {
         const isLowerCase = lowerCaseRegex.test(string[i]);
 
         if (string[i + 1] == undefined) {
-            break
+            break;
         }
 
         if (isUpperCase) {
             if (lowerCaseRegex.test(string[i + 1]) && string[i].toLowerCase() == string[i + 1].toLowerCase()) {
                 newString = newString.slice(0, i) + newString.slice(i + 2);
-                break
+                break;
             }
         } else if (isLowerCase) {
             if (upperCaseRegex.test(string[i + 1]) && string[i].toLowerCase() == string[i + 1].toLowerCase()) {
                 newString = newString.slice(0, i) + newString.slice(i + 2);
-                break
+                break;
             }
         }
     }
-    return newString
-}
+    return newString;
+};
 
 const findAdjacentPolarity = (string: string) => {
     let adjacentPolarity: boolean = false;
@@ -75,68 +74,68 @@ const findAdjacentPolarity = (string: string) => {
 
 
         if (string[i + 1] == undefined) {
-            break
+            break;
         }
 
         if (isUpperCase) {
             if (lowerCaseRegex.test(string[i + 1]) && string[i].toLowerCase() == string[i + 1].toLowerCase()) {
-                adjacentPolarity = true
-                break
+                adjacentPolarity = true;
+                break;
             }
         } else if (isLowerCase) {
             if (upperCaseRegex.test(string[i + 1]) && string[i].toLowerCase() == string[i + 1].toLowerCase()) {
-                adjacentPolarity = true
-                break
+                adjacentPolarity = true;
+                break;
             }
         }
     }
 
     return adjacentPolarity;
-}
+};
 
 const isAdjacentPolarityAvailable = (string: string): boolean => {
-    return findAdjacentPolarity(string)
-}
+    return findAdjacentPolarity(string);
+};
 
 const part1 = (input: string): string => {
     let pairAvailable: boolean = true;
     let string: string = input;
 
     while (pairAvailable) {
-        pairAvailable = isAdjacentPolarityAvailable(string)
-        string = removeFirstAdjacentPolarity(string)
+        pairAvailable = isAdjacentPolarityAvailable(string);
+        string = removeFirstAdjacentPolarity(string);
     }
 
     return string;
-}
+};
 
 const createAllPolymerPairs = () => {
     const allPairs: string[][] = [];
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     for (const letter of alphabet) {
-        const arr = []
-        const upperCase = letter.toUpperCase()
-        const lowerCase = letter.toLowerCase()
+        const arr = [];
+        const upperCase = letter.toUpperCase();
+        const lowerCase = letter.toLowerCase();
 
-        arr.push(upperCase)
-        arr.push(lowerCase)
+        arr.push(upperCase);
+        arr.push(lowerCase);
 
-        allPairs.push(arr)
+        allPairs.push(arr);
     }
 
     return allPairs;
-}
+};
 
 const part2 = () => {
     let string = input;
-    const allPairs: string[][] = createAllPolymerPairs()
+    const allPairs: string[][] = createAllPolymerPairs();
     let shortestLength = 999999999999;
 
     for (const pair of allPairs) {
         string = string.replace(new RegExp(pair[0], 'gi'), '').replace(new RegExp(pair[1], 'gi'), '');
 
-        string = part1(string)
+        string = part1(string);
 
         if (string.length < shortestLength) {
             shortestLength = string.length;
@@ -145,7 +144,7 @@ const part2 = () => {
     }
 
     return shortestLength;
-}
+};
 
-console.log(`Part 1: ${part1(input).length}`)
-console.log(`Part 2: ${part2()}`)
+console.log(`Part 1: ${part1(input).length}`);
+console.log(`Part 2: ${part2()}`);

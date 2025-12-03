@@ -1,5 +1,4 @@
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 export default class InputConverter {
     input: string;
@@ -10,12 +9,12 @@ export default class InputConverter {
 
 
     convertToString() {
-        const text = fs.readFileSync(this.input).toString("utf-8");
+        const text = fs.readFileSync(this.input).toString('utf-8');
         const cleanOutput = this.#inputCleaner(text);
         return cleanOutput;
     }
 
     #inputCleaner(text: string) {
-        return text.replace(/''|\r/g, "").split("\n");
+        return text.replace(/''|\r/g, '').split('\n');
     }
 }

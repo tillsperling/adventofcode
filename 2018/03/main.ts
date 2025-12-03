@@ -21,26 +21,25 @@
  * after that we go through the map and count values > 1
  */
 
-//@ts-ignore
-import * as fs from "fs";
+import * as fs from 'fs';
 
 
 interface coordinate {
-    sp: string
-    w: number | null
-    t: number | null
-    c: number
-    o: boolean
+    sp: string;
+    w: number | null;
+    t: number | null;
+    c: number;
+    o: boolean;
 }
 
 interface mapValue {
-    value: number
-    claim: number[]
+    value: number;
+    claim: number[];
 }
 
-const coordinates: string[] = fs.readFileSync('./input.txt', 'utf-8').toString().replace(/\r/g, ' ').split('\n')
+const coordinates: string[] = fs.readFileSync('./input.txt', 'utf-8').toString().replace(/\r/g, ' ').split('\n');
 const coordinateObjects: coordinate[] = [];
-let cordCount = 1
+let cordCount = 1;
 
 const formStringIntoCoordinate = (string: string) => {
     const coordinate: coordinate = {
@@ -48,7 +47,7 @@ const formStringIntoCoordinate = (string: string) => {
         w: null,
         t: null,
         c: 0,
-        o: false
+        o: false,
     };
 
     const spRegex = /\d+,\d+/;
@@ -57,12 +56,12 @@ const formStringIntoCoordinate = (string: string) => {
     const wt = string.match(wtRegex)!;
 
     coordinate.sp = sp[0].split(',').reverse().join(',');
-    coordinate.w = wt[0].split('x').map(n => parseInt(n))[0]
-    coordinate.t = wt[0].split('x').map(n => parseInt(n))[1]
-    coordinate.c = cordCount++
+    coordinate.w = wt[0].split('x').map(n => parseInt(n))[0];
+    coordinate.t = wt[0].split('x').map(n => parseInt(n))[1];
+    coordinate.c = cordCount++;
 
     return coordinate;
-}
+};
 
 const createMap = (inches: number) => {
     const map = new Map();
@@ -71,13 +70,13 @@ const createMap = (inches: number) => {
         for (let y = 0; y <= inches; y++) {
             map.set(`${x},${y}`, {
                 value: 0,
-                claim: []
+                claim: [],
             });
         }
     }
 
     return map;
-}
+};
 
 const createKeyArray = (start: string, w: number, t: number) => {
     const arr: string[] = [];
@@ -90,33 +89,33 @@ const createKeyArray = (start: string, w: number, t: number) => {
     }
 
     return arr;
-}
+};
 
 const setMapValues = (map: Map<string, mapValue>, coordinates: coordinate[]) => {
     for (const coordinate of coordinates) {
-        const keyArr = createKeyArray(coordinate.sp, coordinate.w!, coordinate.t!)
+        const keyArr = createKeyArray(coordinate.sp, coordinate.w!, coordinate.t!);
         for (const key of keyArr) {
             const current = map.get(key);
             map.set(
                 key,
                 {
                     value: current!.value + 1,
-                    claim: [...current!.claim, coordinate.c]
-                }
+                    claim: [...current!.claim, coordinate.c],
+                },
             );
         }
     }
-}
+};
 
 const getMapValuesGreaterThan = (map: Map<string, mapValue>, n: number) => {
     let sum = 0;
 
-    for (let [key, value] of map.entries()) {
-        if (value.value > n) sum++
+    for (const [key, value] of map.entries()) {
+        if (value.value > n) sum++;
     }
 
     return sum;
-}
+};
 
 const getMapValuesWhereAllAreOne = (map: Map<string, mapValue>) => {
     for (const value of map.values()) {
@@ -127,29 +126,29 @@ const getMapValuesWhereAllAreOne = (map: Map<string, mapValue>) => {
             }
         }
     }
-}
+};
 
 const solution = () => {
     const amountOfInches = 1000;
-    const map: Map<string, mapValue> = createMap(amountOfInches)
+    const map: Map<string, mapValue> = createMap(amountOfInches);
 
     for (const coordinate of coordinates) {
-        coordinateObjects.push(formStringIntoCoordinate(coordinate))
+        coordinateObjects.push(formStringIntoCoordinate(coordinate));
     }
 
-    setMapValues(map, coordinateObjects)
+    setMapValues(map, coordinateObjects);
 
-    const sum = getMapValuesGreaterThan(map, 1)
+    const sum = getMapValuesGreaterThan(map, 1);
 
-    getMapValuesWhereAllAreOne(map, amountOfInches)
+    getMapValuesWhereAllAreOne(map, amountOfInches);
 
     const part2Solution = () => {
         const found = coordinateObjects.find(element => element.o === false);
         return found ? found.c : undefined;
-    }
+    };
 
-    console.log(`Part 1: ${sum}`)
-    console.log(`Part 2: ${part2Solution()}`)
-}
+    console.log(`Part 1: ${sum}`);
+    console.log(`Part 2: ${part2Solution()}`);
+};
 
-solution()
+solution();
