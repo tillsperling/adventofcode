@@ -1,21 +1,27 @@
 /**
- * Notes
+ * PART 1
+ *
  */
 
-import InputConverter from "./Classes/InputConverter";
 
-const inputPartOne = new InputConverter('./input.txt')
 
-function solvePart1() {
-    // const start = Date.now();
+import * as fs from 'fs';
 
-    // console.log(`Time Part 1: ${Date.now() - start}ms`)
-};
-function solvePart2() {
-    // const start = Date.now();
+const input
+    = fs.readFileSync('./input.txt', 'utf-8')
+    .toString()
+    .replace(/\r/g, ' ');
 
-    // console.log(`Time Part 2: ${Date.now() - start}ms`)
+const part1 = () => {
 };
 
-// solvePart1();
-// solvePart2();
+console.time('part1');
+part1();
+console.timeEnd('part1');
+
+const part2 = () => {
+};
+
+console.time('part2');
+part2();
+console.timeEnd('part2');
