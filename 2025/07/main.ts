@@ -17,6 +17,7 @@
 
 
 import * as fs from 'fs';
+import { sumUpArray } from '../../utils/utils';
 
 interface Crossing {
     coordinates: number[];
@@ -42,7 +43,7 @@ const grid: (string | number)[][] = input.map((line) =>
 );
 
 let res = 0;
-let res2 = 0;
+const res2 = 0;
 
 const part1 = () => {
     splitters = createArrayOfSplitters(input);
@@ -108,129 +109,32 @@ const createArrayOfSplitters = (input: string[][]) => {
     return tree;
 };
 
-// console.time('part1');
-// part1();
-// console.timeEnd('part1');
+console.time('part1');
+part1();
+console.timeEnd('part1');
 
 const part2 = () => {
-    crossings = createArrayOfCrossings(input);
-    
-    const crossingMap = new Map();
-    crossings.forEach(c => {
-        crossingMap.set(`${c.coordinates[0]},${c.coordinates[1]}`, c);
-    });
-    
-    // Build a boolean grid of splitters (only '^') and record S separately
-    let startRow = -1, startCol = -1;
-    const isSplitter: boolean[][] = input.map((row, r) =>
-        row.map((ch, c) => {
-            if (ch === 'S') {
-                startRow = r;
-                startCol = c;
-                return false;
-            }
-            return ch === '^';
-        }),
+    const colCounter: number[] = Array.from(
+        { length: input[0].length },
+        () => 0,
     );
-
-// nextBelow[r][c] = row index of the next '^' strictly below r in column c, or -1 if none
-    const nextBelow: number[][] = Array.from({ length: input.length }, () => Array(input[0].length).fill(-1));
-    for (let c = 0; c < input[0].length; c++) {
-        let next = -1;
-        for (let r = input.length - 1; r >= 0; r--) {
-            nextBelow[r][c] = next;
-            if (isSplitter[r][c]) next = r;
-        }
-    }
     
-    const start = crossings.find(c => c.isStart);
-    const queue = [start];
-    
-    while (queue.length) {
-        const current = queue.shift();
-        if (!current) continue;
-        
-        if (current.isStart) {
-            const newPos = traverseAndAlterGrid(current.coordinates, crossingMap);
-            queue.push(newPos);
-        }
-        
-        if (!current.doneLeft) {
-            const newPos = traverseAndAlterGrid(current.startLeft, crossingMap);
-            queue.push(newPos);
-        }
-        
-        if (!current.doneRight) {
-            const newPos = traverseAndAlterGrid(current.startRight, crossingMap);
-            queue.push(newPos);
-        }
-    }
-    
-    const lastGridLine = grid[grid.length - 1];
-    console.log(lastGridLine);
-    console.log(res2);
-};
-
-const traverseAndAlterGrid = (start: number[], crossingMap: Map<string, Crossing>) => {
-    const length = input.length;
-    // const width = input[0].length;
-    
-    for (let i = 1; i < length; i++) {
-        const posRow = start[0] + i;
-        const posCol = start[1];
-        
-        if (posRow >= length) break;
-        
-        // console.log('checking pos', [posRow, posCol]);
-        
-        // const value = grid[posRow][posCol];
-        //
-        // if (typeof value === 'number') {
-        //     grid[posRow][posCol] = value + 1;
-        // }
-        
-        const key = `${posRow},${posCol}`;
-        const crossing = crossingMap.get(key);
-        
-        if (crossing) {
-            res2++;
-            return crossing;
-            
-        }
-    }
-};
-
-const createArrayOfCrossings = (input: string[][]) => {
-    const crossings = [];
-    for (let i = 0; i < input.length; i++) {
-        const line = input[i];
-        for (let j = 0; j < line.length; j++) {
-            if (line[j] === 'S' || line[j] === '^') {
-                const crossing: Crossing = {
-                    coordinates: [i, j],
-                    startLeft: [i, j - 1],
-                    startRight: [i, j + 1],
-                    doneLeft: false,
-                    doneRight: false,
-                    isStart: false,
-                };
-                
-                if (line[j] === 'S') {
-                    crossing.startLeft = [i, j];
-                    crossing.startRight = [i, j];
-                    crossing.doneLeft = true;
-                    crossing.doneRight = true;
-                    crossing.isStart = true;
-                }
-                
-                crossings.push(crossing);
+    for (const line of input) {
+        for (let i = 0; i < line.length; i++) {
+            const currentColValue = colCounter[i];
+            if (line[i] === 'S') {
+                colCounter[i]++;
+            }
+            if (line[i] === '^') {
+                colCounter[i] = 0;
+                colCounter[i + 1] += currentColValue;
+                colCounter[i - 1] += currentColValue;
             }
         }
     }
     
-    return crossings;
+    console.log(sumUpArray(colCounter));
 };
-
 console.time('part2');
 part2(
 );
