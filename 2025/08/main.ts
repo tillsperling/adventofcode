@@ -58,7 +58,7 @@
  * calculate the closest box to a box (this needs to be redone after a circuit is build
  * sort the boxes for the 1 with the least distance to another box coming first
  * distance function that takes two boxes and their cords and returns their distance
- * a DSU function or class that creates sets / circuits of boxes which we can look up fastly
+ * a DSU function or class that creates sets / circuits of boxes which we can look up fastly (dsu.ts)
  *
  */
 
