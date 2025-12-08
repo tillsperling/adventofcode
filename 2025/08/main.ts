@@ -32,9 +32,7 @@
  * it maybe is needed to calculate the closest box for every box and safe that so that we can sort
  * and always connect the shortest possible connection
  *
- * when we found the next closest junction box by going through all junctions boxes
- * this needs to be a function called in a loop
- * we have to link them in a circuit
+ * we then take the box with the closest box in distance and we have to link them in a circuit
  * understanding the problem correctly from the beginning every box is in its own circuit
  * with the first loop done we have 1 circuit of 2 and 18 circuits of one (20 boxes to begin with)
  *
@@ -54,7 +52,13 @@
  *
  * after we did 10 connections we have to give results and multiply the 3 largest circuits
  *
+ * SO TO SIMPLIFY THE JSUT WRITTEN BULLSHIT
  *
+ * we need functions to
+ * calculate the closest box to a box (this needs to be redone after a circuit is build
+ * sort the boxes for the 1 with the least distance to another box coming first
+ * distance function that takes two boxes and their cords and returns their distance
+ * a DSU function or class that creates sets / circuits of boxes which we can look up fastly
  *
  */
 
