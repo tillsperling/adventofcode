@@ -14,20 +14,15 @@ export const gcd = (a: number, b: number): number => (a ? gcd(b % a, a) : b);
  */
 export const lcm = (a: number, b: number): number => (a * b) / gcd(a, b);
 
-/**
- * Sorts a number array from lowest to highest number and returns it
- * @param arr: number[]
- * @returns number[]
- */
-export function sortArrayLowToHigh(arr: number[]) {
-    return arr.sort((a, b) => a - b);
+export function sumUpArray(arr: number[]) {
+    return arr.reduce((acc, curr) => acc + curr);
 }
 
-export function sumUpArray(arr: number[]) {
-    return arr.reduce((acc, curr) => acc + curr)
+export function multiplyArrayValues(arr: number[]) {
+    return arr.reduce((a, b) => a * b, 1);
 }
 
 export function getCenterOfArray(arr: []): number {
     const center = arr[Math.floor(arr.length / 2)];
-    return center
+    return center;
 }

@@ -1,4 +1,10 @@
-class DSU {
+/**
+ * created by Claude >_<
+ * but how the shit would i know what a DSU is
+ * the more u know
+ */
+
+export class DSU {
     private parent: number[];
     private rank: number[];
     
@@ -46,18 +52,3 @@ class DSU {
         return this.find(x) === this.find(y);
     }
 }
-
-// Example usage: detecting if a graph has a cycle
-const dsu = new DSU(5); // 5 nodes: 0, 1, 2, 3, 4
-
-// Add edges
-console.log(dsu.union(0, 1)); // true - connected 0 and 1
-console.log(dsu.union(1, 2)); // true - connected 1 and 2
-console.log(dsu.union(3, 4)); // true - connected 3 and 4
-
-console.log(dsu.isConnected(0, 2)); // true - 0 and 2 are connected
-console.log(dsu.isConnected(0, 3)); // false - different components
-
-// If we try to add edge between 0 and 2, they're already connected
-// This would create a cycle
-console.log(dsu.union(0, 2)); // false - already in same set (cycle detected)
