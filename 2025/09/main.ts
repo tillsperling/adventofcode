@@ -40,7 +40,6 @@ const input
 
 const part1 = () => {
     const length = input.length;
-    const visited = new Set();
     let biggestArea: number = 0;
     
     for (let i = 0; i < length; i++) {
@@ -50,7 +49,6 @@ const part1 = () => {
         
         for (let j = 0; j < length; j++) {
             const cornerB = input[j];
-            if (visited.has(`${cornerA}, ${cornerB}`) || visited.has(`${cornerB}, ${cornerA}`)) continue;
             
             const rowB = cornerB[0];
             const colB = cornerB[1];
@@ -61,9 +59,6 @@ const part1 = () => {
             const area = columnDifference * rowDifference;
             
             if (area > biggestArea) biggestArea = area;
-            
-            visited.add(`${cornerA}, ${cornerB}`);
-            visited.add(`${cornerB}, ${cornerA}`);
         }
     }
     
